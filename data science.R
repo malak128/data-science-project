@@ -71,3 +71,16 @@ hist(df$total,  # Specify the column containing total spending
      xlab = "Total Spending",  # X-axis label
      ylab = "Frequency",  # Y-axis label
      main = "Histogram of Total Spending")  # Title
+
+# for displaying each city with its total spending in descending order 
+grouped_total <- df %>% group_by(city) %>%
+  summarise(totalspending = sum(total) )
+print (grouped_total)
+
+#using barplot 
+#ndf -> new data frame 
+ndf <- grouped_total[order(grouped_total$totalspending , decreasing = TRUE),]
+barplot(ndf$totalspending , name = ndf$city ,
+        xlab = "city" , ylab = "total spending" , main = "display each city total spending",
+        col = "lightpink")
+
